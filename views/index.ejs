@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="icon" type="image/png" href="favi.png">
+</head>
+<body>
+  <div class="container">
+    <h2>Formulario</h2>
+    <form id="formulario">
+        <div class="form-group">
+            <label for="nombre">Coloque su nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="area">Indique a qué área corresponde:</label>
+            <select id="area" name="area" required></select>
+        </div>
+        <div class="form-group">
+            <label for="informacion">¿Qué información necesita?</label>
+            <select id="informacion" name="informacion" required></select>
+        </div>
+        <div class="form-group">
+            <label for="resultado">Opciones:</label>
+            <select id="resultado" name="resultado">
+            </select>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <button type="button" id="limpiar">Limpiar</button>
+            <button type="submit" id="solicitar">Solicitar</button>
+        </div>
+    </form>
+
+    
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+</div>
+<div id="data"></div>
+<script src="script.js"></script>
+<script>
+
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+            //console.log(data)
+            // Las opciones del area
+            const selectArea = document.getElementById('area');
+            data.gerencias.forEach( opcion => {
+                const option = document.createElement('option');
+                option.value = opcion[1];
+                option.textContent = opcion[1];
+                selectArea.appendChild(option)
+            } )
+
+            // Las opciones de informacion
+            const selectInformacion = document.getElementById('informacion');
+            data.padres.forEach( opcion => {
+                const option = document.createElement('option');
+                option.value = opcion[0];
+                option.textContent = opcion[1];
+                option.className = opcion[2]
+                selectInformacion.appendChild(option)
+            } )
+
+            // Guardamos los hijos en sessionStorare
+            sessionStorage.setItem('hijosOptions', JSON.stringify(data.hijos))
+
+
+      })
+      .catch(error => console.log('Error al obtener los datos:', error))
+
+</script>
+</body>
+</html>
