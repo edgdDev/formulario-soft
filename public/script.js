@@ -78,12 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(({ data }) => {
-            //console.log('Success:', data);
-            if ( data[3].includes('http') ) {
+            // console.log('Success:', data);
+            if ( `${data[3]}`.includes('http') ) {
                 return window.open(data[3], '_blank');
             }
             // Hay que presentar modal
-            modalMessage.textContent = `${data[1]}: ${data[3]}`;
+            modalMessage.textContent = `Resultado: ${data[3]}`;
             modal.style.display = "block";
         })
         .catch((error) => {

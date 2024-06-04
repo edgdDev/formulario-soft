@@ -4,7 +4,9 @@
 /* Estilos básicos del cuerpo */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
+    /*background-color: #f8f9fa;*/
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
     display: flex;
