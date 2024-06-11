@@ -7,6 +7,7 @@ const fs = require('fs');
 
 const app = express();
 const port = 3000;
+pathName = path.join(__dirname, 'files', 'prueba.xlsx');
 
 // Configura EJS como el motor de visualización
 app.set('view engine', 'ejs');
@@ -22,9 +23,6 @@ app.get('/', async (req, res) => {
   
     try {
         
-        // pathName = path.join(__dirname, 'files', 'prueba.xlsx');
-
-        // const data = await leerArchivoExcel(pathName)
         res.render('index', { title: 'Mi formulario' });
 
     } catch (error) {
@@ -37,8 +35,6 @@ app.get('/', async (req, res) => {
 app.get('/data', async (req, res) => {
 
     try {
-        
-        pathName = path.join(__dirname, 'files', 'prueba.xlsx');
 
         const data = await leerArchivoExcel(pathName)
         //console.log('La data:', data)

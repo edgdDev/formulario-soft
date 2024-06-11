@@ -32,15 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
         resultado.disabled = false
 
         if (informacionValue === '1') {
-            addOptions(hijosOptions.filter( item => item[0] === 1 ))
+            addOptions(hijosOptions?.filter( item => item[0] === 1 ))
         }
 
         else if (informacionValue === '2') {
-            addOptions(hijosOptions.filter( item => item[0] === 2 ))
+            addOptions(hijosOptions?.filter( item => item[0] === 2 ))
         }
 
         else if (informacionValue === '3') {
-            addOptions(hijosOptions.filter( item => item[0] === 3 ))
+            addOptions(hijosOptions?.filter( item => item[0] === 3 ))
         }
 
     })
@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnSolicitar.addEventListener('click', (event) => {
         event.preventDefault();
+
+        if ( nombreInput.value.trim() === '' ) {
+            return alert('Debes colocar un nombre. Campo nombre requerido.')
+        }
 
         const data = {
             nombre: nombreInput.value,
